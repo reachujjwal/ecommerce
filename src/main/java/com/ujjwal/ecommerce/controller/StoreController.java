@@ -79,7 +79,6 @@ public class StoreController {
 
         /*StoreDTO sucess = storeService.moderateStore(id,status);
         return  ResponseEntity.ok(sucess);*/
-
         return ResponseEntity.ok(storeService.moderateStore(id,status));
     }
 
