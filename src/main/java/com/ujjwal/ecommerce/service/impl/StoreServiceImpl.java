@@ -1,5 +1,6 @@
 package com.ujjwal.ecommerce.service.impl;
 
+import com.ujjwal.ecommerce.domain.StoreStatus;
 import com.ujjwal.ecommerce.exceptions.UserException;
 import com.ujjwal.ecommerce.mapper.StoreMapper;
 import com.ujjwal.ecommerce.model.Store;
@@ -63,7 +64,7 @@ public class StoreServiceImpl implements StoreService {
             existing.setStoreType(storeDTO.getStoreType());
         }
 
-        if(storeDTO.getContact()==null){
+        if(storeDTO.getContact()!=null){
             StoreContact contact = StoreContact.builder()
                     .address(storeDTO.getContact().getAddress())
                     .phone(storeDTO.getContact().getEmail())
@@ -89,4 +90,15 @@ public class StoreServiceImpl implements StoreService {
         }
         return StoreMapper.toDTO(currentUser.getStore());
     }
+
+    @Override
+    public StoreDTO moderateStore(Long id, StoreStatus status) throws UserException {
+        Store store = storeRepository.findById(id).orElseThrow(
+                ()->new UserException("Store not found..!")
+        );
+        store.setStatus(status);
+        Store updatedStore = storeRepository.save(store);
+        return StoreMapper.toDTO(updatedStore);
+    }
+
 }
