@@ -38,6 +38,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @ManyToOne
+    private Branch branch;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime lastLoginAt;

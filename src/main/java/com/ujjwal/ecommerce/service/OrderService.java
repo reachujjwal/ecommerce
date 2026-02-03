@@ -1,0 +1,23 @@
+package com.ujjwal.ecommerce.service;
+
+import com.ujjwal.ecommerce.domain.OrderStatus;
+import com.ujjwal.ecommerce.domain.PaymentType;
+import com.ujjwal.ecommerce.model.Order;
+import com.ujjwal.ecommerce.payload.dto.OrderDTO;
+
+import java.util.List;
+
+public interface OrderService {
+    OrderDTO createOrder(OrderDTO orderDTO) throws Exception;
+    OrderDTO getOrderById(Long id) throws Exception;
+    List<OrderDTO> getOrdersByBranch(Long branchId,
+                                     Long customerId,
+                                     Long cashierId,
+                                     PaymentType paymentType,
+                                     OrderStatus status) throws Exception;
+    List<OrderDTO> getOrderByCashier(Long cashierId) throws Exception;
+    void deleteOrder(Long id) throws Exception;
+    List<OrderDTO> getTodayOrdersByBranch(Long branchId) throws Exception;
+    List<OrderDTO> getOrdersByCustomerId(Long customerId) throws Exception;
+    List<OrderDTO> getTop5RecentOrdersByBranchId(Long branchId) throws Exception;
+}
